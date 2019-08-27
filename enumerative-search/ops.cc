@@ -5,6 +5,19 @@
 
 ////
 //
+// Set an integer treated as Null
+//
+////
+static int Null = 0;
+void set_null(int n) {
+  Null = n;
+}
+int get_null() {
+  return Null;
+}
+
+////
+//
 // helper high order functions
 //
 ////
@@ -154,7 +167,7 @@ void arr_min(Datum *arg1, Datum *result_space) {
 void arr_head(Datum *arg1, Datum *result_space) {
   result_space->SetType(Int);
   if (arg1->Size() == 0) {
-    result_space->SetIntValue(0);
+    result_space->SetIntValue(get_null());
   } else {
     result_space->SetIntValue(arg1->GetArrayElementValue(0));
   }
@@ -163,7 +176,7 @@ void arr_head(Datum *arg1, Datum *result_space) {
 void arr_last(Datum *arg1, Datum *result_space) {
   result_space->SetType(Int);
   if (arg1->Size() == 0) {
-    result_space->SetIntValue(0);
+    result_space->SetIntValue(get_null());
   } else {
     int last_idx = arg1->Size() - 1;
     result_space->SetIntValue(arg1->GetArrayElementValue(last_idx));
@@ -315,7 +328,7 @@ void access(Datum *arg1, Datum *arg2, Datum *result_space) {
   if (offset >= 0 && offset < arg2->Size()) {
     result_space->SetIntValue(arg2->GetArrayElementValue(offset));
   } else {
-    result_space->SetIntValue(-1000000);  // TODO: what should happen here?
+    result_space->SetIntValue(get_null());
   }
 }
 

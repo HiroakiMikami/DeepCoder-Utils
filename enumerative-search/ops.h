@@ -28,6 +28,9 @@
 
 #include "datum.h"
 
+void set_null(int n);
+int get_null();
+
 // helpers
 void map_int_int(Datum *arg1, IntIntLambda f, Datum *result_space);
 void zipwith(Datum *arg1, Datum *arg2, IntIntIntLambda f, Datum *result_space);

@@ -173,9 +173,9 @@ pair<bool, pair<int, double> > run(string test_set,
 
 int main(int argc, char *argv[])
 {
-  if (argc != 7) {
+  if (argc != 8) {
     cout << "Usage:" << endl;
-    cout << "  search TEST_SET_NAME NUM_EXAMPLES MAX_PROG_LEN PROB_IDX ORDER_TYPE SaA_CUTOFF" << endl;
+    cout << "  search TEST_SET_NAME NUM_EXAMPLES MAX_PROG_LEN PROB_IDX ORDER_TYPE SaA_CUTOFF NULL" << endl;
     exit(1);
   }
   string test_set = argv[1];
@@ -184,5 +184,7 @@ int main(int argc, char *argv[])
   int problem_idx = atoi(argv[4]);
   int ordering_type = atoi(argv[5]); // 1 nn, 0 prior, -1,-2,-3,-4,-5,... random orderings 
   int sort_and_add_cutoff = atoi(argv[6]);
+  int n = atoi(argv[7]);
+  set_null(n);
   run(test_set, problem_idx, num_examples_per_program, max_program_length, ordering_type, sort_and_add_cutoff);
 }

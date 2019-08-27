@@ -50,7 +50,7 @@ g++ -std=c++11 -O3 -DVERBOSE_MODE successor.o ops.o program_state.o main.o datum
 
 The resulting binary can then be tested on the provided test data points:
 ```
-$ ./search example 3 3 0 0 -1
+$ ./search example 3 3 0 0 -1 256
 Initial state 0:
   Register 0: Int( 8 )
   Register 1: Array( 7 9 3 1 3 0 7 2 3 1 )
@@ -74,17 +74,18 @@ Solution:
  %4 <- access %3 %2
 ```
 
-`search` takes 6 arguments (see below for a precise description of all involved data files):
+`search` takes 7 arguments (see below for a precise description of all involved data files):
 * `TEST_SET_NAME`: The name of the dataset. Used to find files, as we are looking in `data/${TEST_SET_NAME}`.
 * `NUM_EXAMPLES`: Number of examples per program.
 * `MAX_PROG_LEN`: Maximum length of programs to consider.
 * `PROB_IDX`: Index of problem to test on (index is used to find example data in the data files).
 * `ORDER_TYPE`: Ordering type to use. `0` indicates using the prior located in `data/${TEST_SET_NAME}/prior.txt` and `1` makes the search use the data in `data/${TEST_SET_NAME}/predictions/${PROB_IDX}.txt`.
 * `SaA_CUTOFF`: Cutoff used by "sort & and"-style search (i.e., we only use the top `SaA_CUTOFF` most likely functions). `-1` indicates that all functions can be used.
+* `NULL`: An integer treated as Null in the DSL. It should be equal to `value_range` used in `generate_io_samples.py`.
 
 We can repeat the example from below with a carefully selected ordering of functions and observe a substantial speedup:
 ```
-$ ./search example 3 3 0 1 -1
+$ ./search example 3 3 0 1 -1 256
 Initial state 0:
   Register 0: Int( 8 )
   Register 1: Array( 7 9 3 1 3 0 7 2 3 1 )
